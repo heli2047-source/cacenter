@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CACENTER Locadora de Veículos | Aluguel de Carros em Campinas/SP</title>
+  <meta name="description"
+    content="Alugue seu veículo com segurança, conforto e praticidade na Cacenter Locadora em Campinas/SP. Frota revisada, veículos de 7 lugares, opção GNV e preços competitivos.">
+  <meta name="keywords"
+    content="locadora de veículos, aluguel de carros campinas, zafira 7 lugares, doblô 7 lugares, carros gnv campinas, cacenter locadora">
+
+  <!-- Favicon / Styling -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Feather Icons for Clean UI Icons -->
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body>
+
+  <!-- Header & Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo">
+        <img src="assets/logo.png" alt="CACENTER Locadora de Veículos Logo">
+        <span class="brand-name">CACENTER</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#frota">Frota</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#como-funciona">Como Funciona</a></li>
+        <li><a href="#faq">Dúvidas</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+
+
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir Menu">
+        <i data-feather="menu"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="inicio" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <div class="hero-tag">
+          <i data-feather="shield"></i>
+          <span>Locadora de Confiança em Campinas/SP</span>
+        </div>
+        <h1 class="hero-title">
+          Alugue seu veículo com <span>segurança, conforto</span> e agilidade
+        </h1>
+        <p class="hero-subtitle">
+          Soluções completas em locação de carros para pessoas físicas e empresas. Frota 100% revisada, opções de 7
+          lugares e GNV para máxima economia.
+        </p>
+
+        <div class="hero-badges">
+          <div class="badge-item">
+            <i data-feather="check-circle"></i>
+            <span>Frota 100% Revisada</span>
+          </div>
+          <div class="badge-item">
+            <i data-feather="check-circle"></i>
+            <span>Sem Burocracia</span>
+          </div>
+          <div class="badge-item">
+            <i data-feather="check-circle"></i>
+            <span>Opções 7 Lugares & GNV</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+          <a href="#frota" class="btn-primary">
+            <i data-feather="truck"></i>
+            <span>Ver Frota Disponível</span>
+          </a>
+          <a href="#" data-wa-action="hero_quote" class="btn-primary btn-whatsapp">
+            <i data-feather="phone"></i>
+            <span>Solicitar Orçamento</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-image-wrapper">
+        <img src="assets/hero.png" alt="Veículos CACENTER Locadora" class="hero-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Nossa Frota Section -->
+  <section id="frota" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Nossa Frota</div>
+        <h2 class="section-title">Veículos Preparados para sua Necessidade</h2>
+        <p class="section-description">
+          Escolha o modelo ideal para viagens em família, trabalho, empresas ou dia a dia.
+        </p>
+      </div>
+
+      <div class="fleet-grid">
+
+        <!-- Fleet Item 1 -->
+        <div class="fleet-card glass">
+          <div class="fleet-img-container">
+            <span class="fleet-badge">7 Lugares</span>
+            <img src="assets/zafira.jpg" alt="Chevrolet Zafira 7 Lugares"
+              style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div class="fleet-content">
+            <h3 class="fleet-title">Chevrolet Zafira</h3>
+            <p class="fleet-subtitle">Minivan Espaçosa | Ideal para Famílias e Grupos</p>
+
+            <div class="fleet-specs">
+              <div class="spec-item">
+                <i data-feather="users"></i>
+                <span>7 Passageiros</span>
+              </div>
+              <div class="spec-item">
+                <i data-feather="zap"></i>
+                <span>GNV Economia</span>
+              </div>
+              <div class="spec-item">
+                <i data-feather="wind"></i>
+                <span>Ar Condicionado</span>
+              </div>
+              <div class="spec-item">
+                <i data-feather="disc"></i>
+                <span>Direção Hidráulica</span>
+              </div>
+            </div>
+
+            <div class="fleet-footer">
+              <div class="fleet-price">
+                A partir de<br><strong>Consulte via WhatsApp</strong>
+              </div>
+              <button class="btn-primary btn-whatsapp" data-car-model="Chevrolet Zafira (7 Lugares)">
+                <i data-feather="calendar"></i>
+                <span>Reservar</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fleet Item 2 -->
+        <div class="fleet-card glass">
+          <div class="fleet-img-container">
+            <span class="fleet-badge">Sedan Econômico</span>
+            <img src="assets/voyage.png" alt="Volkswagen Voyage" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div class="fleet-content">
+            <h3 class="fleet-title">Volkswagen Voyage</h3>
+            <p class="fleet-subtitle">Sedan Confortável | Amplo Porta-Malas</p>
+
+            <div class="fleet-specs">
+              <div class="spec-item">
+                <i data-feather="users"></i>
+                <span>5 Passageiros</span>
+              </div>
+              <div class="spec-item">
+                <i data-feather="droplet"></i>
+                <span>Flex / GNV</span>
+              </div>
+              <div class="spec-item">
+                <i data-feather="wind"></i>
+                <span>Ar Condicionado</span>
+              </div>
+              <div class="spec-item">
+                <i data-feather="disc"></i>
+                <span>Direção Elétrica</span>
+              </div>
+            </div>
+
+            <div class="fleet-footer">
+              <div class="fleet-price">
+                A partir de<br><strong>Consulte via WhatsApp</strong>
+              </div>
+              <button class="btn-primary btn-whatsapp" data-car-model="Volkswagen Voyage">
+                <i data-feather="calendar"></i>
+                <span>Reservar</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fleet Item 3 -->
+        <div class="fleet-card glass">
+          <div class="fleet-img-container">
+            <span class="fleet-badge">Multiuso & Espaço</span>
+            <img src="assets/doblo.jpg" alt="Fiat Doblô 7 Lugares"
+              style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div class="fleet-content">
+            <h3 class="fleet-title">Fiat Doblô</h3>
+            <p class="fleet-subtitle">Versatilidade Máxima | 7 Lugares & Grande Capacidade</p>
+
+            <div class="fleet-specs">
+              <div class="spec-item">
+                <i data-feather="users"></i>
+                <span>7 Passageiros</span>
+              </div>
+              <div class="spec-item">
+                <i data-feather="zap"></i>
+                <span>GNV Economia</span>
+              </div>
+              <div class="spec-item">
+                <i data-feather="wind"></i>
+                <span>Ar Condicionado</span>
+              </div>
+              <div class="spec-item">
+                <i data-feather="disc"></i>
+                <span>Direção Hidráulica</span>
+              </div>
+            </div>
+
+            <div class="fleet-footer">
+              <div class="fleet-price">
+                A partir de<br><strong>Consulte via WhatsApp</strong>
+              </div>
+              <button class="btn-primary btn-whatsapp" data-car-model="Fiat Doblô (7 Lugares)">
+                <i data-feather="calendar"></i>
+                <span>Reservar</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Nossos Serviços Section -->
+  <section id="servicos" class="section" style="background: rgba(15, 23, 42, 0.4);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Soluções em Locação</div>
+        <h2 class="section-title">Por Que Escolher a CACENTER?</h2>
+        <p class="section-description">
+          Oferecemos planos flexíveis adaptados às suas necessidades pessoais ou empresariais.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card glass">
+          <div class="service-icon">
+            <i data-feather="clock"></i>
+          </div>
+          <h3 class="service-title">Locação Diária & Semanal</h3>
+          <p class="service-desc">
+            Flexibilidade total para viagens rápidas, passeios nos finais de semana ou compromissos esporádicos.
+          </p>
+        </div>
+
+        <div class="service-card glass">
+          <div class="service-icon">
+            <i data-feather="briefcase"></i>
+          </div>
+          <h3 class="service-title">Planos Mensais & Corporativos</h3>
+          <p class="service-desc">
+            Solução inteligente para empresas e profissionais que buscam redução de custos com veículos de qualidade.
+          </p>
+        </div>
+
+        <div class="service-card glass">
+          <div class="service-icon">
+            <i data-feather="shield"></i>
+          </div>
+          <h3 class="service-title">Suporte & Frota Assegurada</h3>
+          <p class="service-desc">
+            Veículos com manutenção rigorosa e suporte rápido durante todo o período da sua locação.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como Funciona Section -->
+  <section id="como-funciona" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Passo a Passo</div>
+        <h2 class="section-title">Como Alugar seu Veículo em 3 Passos</h2>
+        <p class="section-description">Processo ágil, simplificado e sem burocracia desnecessária.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card glass">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Escolha o Veículo</h3>
+          <p class="step-desc">Confira nossa frota de 5 ou 7 lugares e selecione o modelo ideal para você.</p>
+        </div>
+
+        <div class="step-card glass">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Solicite o Orçamento</h3>
+          <p class="step-desc">Clique no botão do WhatsApp e fale diretamente com nosso atendimento em tempo real.</p>
+        </div>
+
+        <div class="step-card glass">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Retire com Rapidez</h3>
+          <p class="step-desc">Apresente seus documentos e retire seu veículo revisado e pronto para rodar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dúvidas Frequentes (FAQ) Section -->
+  <section id="faq" class="section" style="background: rgba(15, 23, 42, 0.4);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Perguntas Frequentes</div>
+        <h2 class="section-title">Tire Suas Dúvidas</h2>
+        <p class="section-description">Respostas diretas para as perguntas mais comuns dos nossos clientes.</p>
+      </div>
+
+      <div class="faq-container">
+        <div class="faq-item glass">
+          <button class="faq-question">
+            <span>Quais são os documentos necessários para alugar um veículo?</span>
+            <i data-feather="chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            Para alugar um veículo na Cacenter Locadora, você precisa apresentar: CNH válida (Carteira Nacional de
+            Habilitação), RG e CPF, e um comprovante de residência recente.
+          </div>
+        </div>
+
+        <div class="faq-item glass">
+          <button class="faq-question">
+            <span>A frota possui opção de veículos com GNV?</span>
+            <i data-feather="chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            Sim! Contamos com modelos com kit GNV (Gás Natural Veicular), ideais para quem busca economizar
+            significativamente em viagens mais longas ou uso diário.
+          </div>
+        </div>
+
+        <div class="faq-item glass">
+          <button class="faq-question">
+            <span>Quais modelos de 7 lugares estão disponíveis?</span>
+            <i data-feather="chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            Disponibilizamos modelos como a Chevrolet Zafira e Fiat Doblô de 7 lugares, perfeitos para viagens em
+            família ou transporte de equipes de trabalho com total conforto.
+          </div>
+        </div>
+
+        <div class="faq-item glass">
+          <button class="faq-question">
+            <span>Como funciona o atendimento e orçamento?</span>
+            <i data-feather="chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            Você pode solicitar seu orçamento instantâneo pelo nosso WhatsApp. Nossa equipe responde rapidamente com os
+            valores das diárias, pacotes semanais ou mensais.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato & Localização Section -->
+  <section id="contato" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Fale Conosco</div>
+        <h2 class="section-title">Localização & Contato</h2>
+        <p class="section-description">Venha nos visitar em Campinas/SP ou fale diretamente com a equipe.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card glass">
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <i data-feather="map-pin"></i>
+            </div>
+            <div class="contact-details">
+              <h4>Endereço</h4>
+              <p>Av. Ruy Rodrigues, 424 - Jardim Novo Campos Elíseos<br>Campinas - SP, 13060-192</p>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <i data-feather="phone"></i>
+            </div>
+            <div class="contact-details">
+              <h4>Telefones & WhatsApp</h4>
+              <p>(19) 99244-8454</p>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <i data-feather="clock"></i>
+            </div>
+            <div class="contact-details">
+              <h4>Horário de Atendimento</h4>
+              <p>Segunda a Sexta: 08:00 às 18:00<br>Sábado: 08:00 às 12:00</p>
+            </div>
+          </div>
+
+          <a href="https://maps.google.com/?q=Av.+Ruy+Rodrigues,+424+-+Jardim+Novo+Campos+Eliseos,+Campinas+-+SP"
+            target="_blank" class="btn-primary" style="margin-top: 12px; justify-content: center;">
+            <i data-feather="map"></i>
+            <span>Abrir Rota no Google Maps</span>
+          </a>
+        </div>
+
+        <div class="contact-card glass" style="align-items: center; justify-content: center; text-align: center;">
+          <i data-feather="message-circle"
+            style="width: 64px; height: 64px; color: var(--whatsapp-green); margin-bottom: 16px;"></i>
+          <h3 style="font-family: var(--font-heading); font-size: 1.6rem; margin-bottom: 12px;">Precisa de um carro
+            agora?</h3>
+          <p style="color: var(--text-muted); margin-bottom: 24px;">Fale diretamente com um de nossos consultores e
+            retire seu carro com rapidez.</p>
+          <a href="#" data-wa-action="contact_direct" class="btn-primary btn-whatsapp"
+            style="width: 100%; justify-content: center; padding: 16px;">
+            <i data-feather="send"></i>
+            <span>Conversar no WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating WhatsApp Widget -->
+  <a href="#" data-wa-action="floating_chat" class="floating-whatsapp" aria-label="Falar no WhatsApp">
+    <i data-feather="message-square" style="width: 28px; height: 28px;"></i>
+  </a>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <div class="brand-logo">
+        <img src="assets/logo.png" alt="CACENTER Logo">
+        <span class="brand-name">CACENTER</span>
+      </div>
+      <div class="footer-text">
+        &copy; 2026 CACENTER Locadora de Veículos. Todos os direitos reservados. | Desenvolvido por <a
+          href="https://www.linkedin.com/in/heliezer-garcia/" target="_blank"
+          style="color: var(--accent-primary); font-weight: 600; text-decoration: underline;">Heliezer Garcia</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="app.js?v=5"></script>
+  <script>
+    feather.replace();
+  </script>
+</body>
+
+</html>
