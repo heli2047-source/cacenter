@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const DESTINOS_FIXOS = [
-    { nome: 'Oficina CACENTER', telefone: '5519989161240' }
+    { nome: 'Oficina CACENTER', telefone: '5519989219548' }
   ];
 
   const LIMITE_MENSAGEM = 1800;

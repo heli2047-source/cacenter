@@ -52,14 +52,14 @@ No `localStorage` do próprio navegador, na chave `cacenter.orcamentos.v1`.
 
 | O que mudar | Onde |
 |---|---|
-| Destinatários fixos do WhatsApp | `app.js`, constante `DESTINOS_FIXOS` — um `{ nome, telefone }` por linha, telefone em formato internacional sem símbolos (`5519989161240`) |
+| Destinatários fixos do WhatsApp | `app.js`, constante `DESTINOS_FIXOS` — um `{ nome, telefone }` por linha, telefone em formato internacional sem símbolos (`5519989219548`) |
 | Limite de tamanho da mensagem | `app.js`, constante `LIMITE_MENSAGEM` |
 | Quantos orçamentos o histórico guarda | `app.js`, constante `LIMITE_HISTORICO` |
 | Campos do cliente / veículo | `index.html` — basta o `data-cliente="Rótulo"` ou `data-veiculo="Rótulo"` no input; a mensagem e o registro se montam sozinhos a partir desses atributos |
 | Estrutura de uma linha de item | `index.html`, `<template id="tplLinha">` |
 | Cartão do histórico | `index.html`, `<template id="tplResultado">` |
 
-O número atual (`5519989161240`) é **provisório, para testes**.
+O número fixo da oficina é `5519989219548` — (19) 98921-9548.
 
 Não existe disparo simultâneo a partir da página: o link `wa.me` abre uma
 conversa por vez e o navegador barra a abertura de várias janelas num mesmo
