@@ -145,14 +145,15 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Habilita o envio e diz, em texto, o que ainda falta para liberar.
    *
-   * Nome e placa são obrigatórios porque são as duas chaves de busca do histórico: um
-   * orçamento gravado sem eles seria impossível de achar depois.
+   * Nome e placa são as duas únicas exigências, e só porque são as chaves de busca do
+   * histórico: um orçamento gravado sem eles seria impossível de achar depois. Peça e serviço
+   * ficam de fora de propósito — o atendente às vezes manda o orçamento só com o veículo, para
+   * fechar os valores depois de abrir o motor.
    */
   function atualizarEnvio() {
     const faltando = [];
     if (campoNome.value.trim() === '') faltando.push('o nome do cliente');
     if (campoPlacas.value.trim() === '') faltando.push('a placa do veículo');
-    if (totalGeral <= 0) faltando.push('ao menos um item com valor');
 
     btnEnviar.disabled = faltando.length > 0;
     aviso.classList.remove('erro');

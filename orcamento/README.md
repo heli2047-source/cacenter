@@ -9,9 +9,11 @@ o orçamento já escrito. Substitui a ficha em papel do `ORÇAMENTO.pdf`.
 
 ## Fluxo
 
-1. Preenche cliente, veículo, peças e serviços. **Nome e placa são
-   obrigatórios** — são as duas chaves de busca do histórico; sem elas o
-   orçamento seria impossível de achar depois.
+1. Preenche cliente, veículo, peças e serviços. **Nome e placa são os únicos
+   campos obrigatórios** — são as duas chaves de busca do histórico, e sem elas
+   o orçamento seria impossível de achar depois. Peça e serviço são opcionais:
+   dá para mandar o orçamento só com o veículo e fechar os valores depois de
+   abrir o motor.
 2. **Enviar por WhatsApp** grava o orçamento no navegador e abre a conversa com
    a oficina.
 3. O formulário fica em **modo de edição** daquele orçamento. Corrigir um valor
