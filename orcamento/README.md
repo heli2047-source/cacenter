@@ -14,8 +14,12 @@ o orçamento já escrito. Substitui a ficha em papel do `ORÇAMENTO.pdf`.
    o orçamento seria impossível de achar depois. Peça e serviço são opcionais:
    dá para mandar o orçamento só com o veículo e fechar os valores depois de
    abrir o motor.
-2. **Enviar por WhatsApp** grava o orçamento no navegador e abre a conversa com
-   a oficina.
+2. **Enviar por WhatsApp** grava o orçamento no navegador e abre a folha de
+   destinatários: a lista fixa de `DESTINOS_FIXOS` mais o cliente, quando o
+   campo "WhatsApp do cliente" está preenchido. O envio é **um a um** — toca num
+   destinatário, o WhatsApp abre naquela conversa, volta e toca no próximo. Quem
+   já recebeu fica marcado com `✓ enviado`, e a marca cai sozinha se o orçamento
+   for revisado depois, porque aí o que foi enviado é a versão antiga.
 3. O formulário fica em **modo de edição** daquele orçamento. Corrigir um valor
    e enviar de novo **atualiza o mesmo registro** em vez de criar um segundo.
 4. **Novo orçamento** limpa a tela e sai do modo de edição.
@@ -48,7 +52,7 @@ No `localStorage` do próprio navegador, na chave `cacenter.orcamentos.v1`.
 
 | O que mudar | Onde |
 |---|---|
-| Número de destino do WhatsApp | `app.js`, constante `OFICINA_PHONE` |
+| Destinatários fixos do WhatsApp | `app.js`, constante `DESTINOS_FIXOS` — um `{ nome, telefone }` por linha, telefone em formato internacional sem símbolos (`5519989161240`) |
 | Limite de tamanho da mensagem | `app.js`, constante `LIMITE_MENSAGEM` |
 | Quantos orçamentos o histórico guarda | `app.js`, constante `LIMITE_HISTORICO` |
 | Campos do cliente / veículo | `index.html` — basta o `data-cliente="Rótulo"` ou `data-veiculo="Rótulo"` no input; a mensagem e o registro se montam sozinhos a partir desses atributos |
@@ -56,6 +60,17 @@ No `localStorage` do próprio navegador, na chave `cacenter.orcamentos.v1`.
 | Cartão do histórico | `index.html`, `<template id="tplResultado">` |
 
 O número atual (`5519989161240`) é **provisório, para testes**.
+
+Não existe disparo simultâneo a partir da página: o link `wa.me` abre uma
+conversa por vez e o navegador barra a abertura de várias janelas num mesmo
+toque. Para atingir muita gente de uma vez, o caminho é a lista de transmissão
+do próprio WhatsApp; a página sozinha só dispararia com a API oficial do
+WhatsApp Business, que exige servidor, conta aprovada e cobrança por conversa.
+
+**Ao alterar `styles.css` ou `app.js`, suba o `?v=` das duas referências no
+`index.html`.** O celular do balcão guarda os arquivos em cache e, sem trocar a
+URL, continuaria rodando a versão anterior depois do deploy — com o HTML novo e
+o JavaScript velho, que é o pior dos dois mundos.
 
 Ao mexer no formato do registro gravado, **suba a chave**
 (`cacenter.orcamentos.v2`): os aparelhos em uso têm orçamentos no formato antigo

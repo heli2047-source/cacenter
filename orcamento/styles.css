@@ -810,3 +810,68 @@ body.modal-aberto {
     flex: 0 1 auto;
   }
 }
+
+/* Folha de destinatários */
+.destino {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 60px;
+  padding: 12px 14px;
+  font-family: var(--font-body);
+  text-align: left;
+  color: var(--text-main);
+  background: rgba(37, 211, 102, 0.1);
+  border: 1px solid rgba(37, 211, 102, 0.35);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.destino:hover,
+.destino:focus-visible {
+  background: rgba(37, 211, 102, 0.2);
+  border-color: var(--whatsapp-green);
+  outline: none;
+}
+
+.destino-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.destino-nome {
+  font-size: 0.95rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.destino-tel {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.destino-estado {
+  flex-shrink: 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--whatsapp-green);
+}
+
+.destino.enviado {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border-color);
+}
+
+.destino.enviado .destino-nome {
+  color: var(--text-muted);
+}
+
+.destino.enviado .destino-estado {
+  color: var(--accent-primary);
+}

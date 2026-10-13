@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const OFICINA_PHONE = '5519989161240';
+  const DESTINOS_FIXOS = [
+    { nome: 'Oficina CACENTER', telefone: '5519989161240' }
+  ];
+
   const LIMITE_MENSAGEM = 1800;
   const CHAVE_ARMAZENAMENTO = 'cacenter.orcamentos.v1';
   const LIMITE_HISTORICO = 300;
@@ -21,6 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const faixaEdicao = document.getElementById('faixaEdicao');
   const faixaDetalhe = document.getElementById('faixaDetalhe');
+  const dlgEnvio = document.getElementById('dlgEnvio');
+  const envioLista = document.getElementById('envioLista');
+  const envioInfo = document.getElementById('envioInfo');
+  const tplDestino = document.getElementById('tplDestino');
   const dlgBusca = document.getElementById('dlgBusca');
   const campoBusca = document.getElementById('campoBusca');
   const dlgLista = document.getElementById('dlgLista');
@@ -33,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let totalGeral = 0;
   let idEmEdicao = null;
+  const enviados = new Map();
 
   /**
    * Converte o que o atendente digitou num número.
@@ -424,17 +432,115 @@ document.addEventListener('DOMContentLoaded', () => {
     recalcular();
   }
 
-  /** Abre o WhatsApp da oficina com o orçamento escrito, ou avisa se a mensagem não couber. */
-  function enviarPorWhatsApp(reg) {
-    const mensagem = montarMensagem(reg);
+  /**
+   * Põe um telefone digitado no formato que o `wa.me` entende.
+   *
+   * O atendente digita `(19) 98916-1240`, `19989161240` ou `+55 19 98916-1240` conforme o dia.
+   * Dez ou onze dígitos são número nacional e ganham o 55 na frente; doze ou treze já vêm com
+   * o código do país. Qualquer outro tamanho devolve nulo, porque abrir o WhatsApp num número
+   * truncado gera uma conversa com desconhecido em vez de um erro visível.
+   */
+  function normalizarTelefone(texto) {
+    const digitos = String(texto || '').replace(/\D/g, '');
 
-    if (mensagem.length > LIMITE_MENSAGEM) {
-      aviso.textContent = `Orçamento longo demais para o WhatsApp (${mensagem.length} de ${LIMITE_MENSAGEM} caracteres). Encurte as descrições ou divida em dois envios.`;
+    if (digitos.length === 10 || digitos.length === 11) return `55${digitos}`;
+    if ((digitos.length === 12 || digitos.length === 13) && digitos.startsWith('55')) return digitos;
+    return null;
+  }
+
+  /** Escreve um telefone E.164 brasileiro no formato que se lê no Brasil. */
+  function formatarTelefone(e164) {
+    const nacional = e164.slice(2);
+    const ddd = nacional.slice(0, 2);
+    const resto = nacional.slice(2);
+    return `(${ddd}) ${resto.slice(0, resto.length - 4)}-${resto.slice(-4)}`;
+  }
+
+  /**
+   * Monta a lista de destinatários de um orçamento.
+   *
+   * O WhatsApp do cliente sai do próprio registro, não do formulário, para que reenviar um
+   * orçamento antigo do histórico alcance o cliente daquele orçamento e não o que estiver
+   * digitado na tela agora.
+   */
+  function destinos(reg) {
+    const lista = DESTINOS_FIXOS.map(d => ({ ...d, fixo: true }));
+    const doCliente = reg.cliente.find(c => c.campo === 'whatsappCliente');
+    const telefone = doCliente ? normalizarTelefone(doCliente.valor) : null;
+
+    if (telefone && !lista.some(d => d.telefone === telefone)) {
+      lista.push({ nome: reg.nome || 'Cliente', telefone, fixo: false });
+    }
+
+    return lista;
+  }
+
+  /**
+   * Lembra para quem este orçamento já foi aberto, e esquece quando ele muda.
+   *
+   * As marcas existem porque o envio é um a um: o atendente sai para o WhatsApp e volta sem
+   * saber onde parou. Mas uma marca de "enviado" sobre um orçamento já revisado mentiria — o
+   * destinatário recebeu a versão anterior — então o carimbo de revisão zera a lista.
+   */
+  function marcasDe(reg) {
+    const carimbo = reg.atualizadoEm || reg.criadoEm;
+    const atual = enviados.get(reg.id);
+
+    if (!atual || atual.carimbo !== carimbo) {
+      const nova = { carimbo, telefones: new Set() };
+      enviados.set(reg.id, nova);
+      return nova;
+    }
+
+    return atual;
+  }
+
+  /** Abre o WhatsApp de um destinatário com o orçamento escrito. */
+  function enviarPara(reg, telefone) {
+    window.open(`https://wa.me/${telefone}?text=${encodeURIComponent(montarMensagem(reg))}`, '_blank');
+    marcasDe(reg).telefones.add(telefone);
+  }
+
+  /** Desenha a folha de destinatários do orçamento aberto. */
+  function renderizarDestinos(reg) {
+    const marcas = marcasDe(reg);
+    const lista = destinos(reg);
+
+    envioLista.replaceChildren();
+    envioInfo.textContent = lista.length > 1
+      ? `${reg.nome} · ${moeda.format(reg.totalGeral)} · toque em cada destinatário; o WhatsApp abre um de cada vez.`
+      : `${reg.nome} · ${moeda.format(reg.totalGeral)}`;
+
+    lista.forEach(destino => {
+      const no = tplDestino.content.firstElementChild.cloneNode(true);
+      const jaFoi = marcas.telefones.has(destino.telefone);
+
+      no.dataset.telefone = destino.telefone;
+      no.querySelector('.destino-nome').textContent = destino.nome;
+      no.querySelector('.destino-tel').textContent = formatarTelefone(destino.telefone);
+      no.querySelector('.destino-estado').textContent = jaFoi ? '✓ enviado' : 'Enviar';
+      no.classList.toggle('enviado', jaFoi);
+
+      envioLista.appendChild(no);
+    });
+  }
+
+  /**
+   * Abre a folha de envio, ou recusa quando a mensagem não cabe num link do WhatsApp.
+   *
+   * O limite é checado uma vez aqui e não a cada destinatário: a mensagem é a mesma para todos.
+   */
+  function abrirEnvio(reg) {
+    if (montarMensagem(reg).length > LIMITE_MENSAGEM) {
+      aviso.textContent = `Orçamento longo demais para o WhatsApp (${montarMensagem(reg).length} de ${LIMITE_MENSAGEM} caracteres). Encurte as descrições ou divida em dois envios.`;
       aviso.classList.add('erro');
       return false;
     }
 
-    window.open(`https://wa.me/${OFICINA_PHONE}?text=${encodeURIComponent(mensagem)}`, '_blank');
+    dlgEnvio.dataset.id = reg.id;
+    renderizarDestinos(reg);
+    dlgEnvio.showModal();
+    document.body.classList.add('modal-aberto');
     return true;
   }
 
@@ -531,10 +637,24 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
 
     const registro = salvarOrcamento(coletarOrcamento());
-    if (!enviarPorWhatsApp(registro)) return;
+    if (!abrirEnvio(registro)) return;
 
     entrarEmEdicao(registro);
   });
+
+  envioLista.addEventListener('click', e => {
+    const botao = e.target.closest('[data-destino]');
+    if (!botao) return;
+
+    const registro = lerOrcamentos().find(reg => reg.id === dlgEnvio.dataset.id);
+    if (!registro) return;
+
+    enviarPara(registro, botao.dataset.telefone);
+    renderizarDestinos(registro);
+  });
+
+  document.getElementById('btnFecharEnvio').addEventListener('click', () => dlgEnvio.close());
+  dlgEnvio.addEventListener('close', () => document.body.classList.remove('modal-aberto'));
 
   document.getElementById('btnBuscar').addEventListener('click', abrirBusca);
   document.getElementById('btnFechar').addEventListener('click', () => dlgBusca.close());
@@ -558,7 +678,8 @@ document.addEventListener('DOMContentLoaded', () => {
       dlgBusca.close();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (e.target.closest('[data-reenviar]')) {
-      enviarPorWhatsApp(registro);
+      dlgBusca.close();
+      abrirEnvio(registro);
     } else if (e.target.closest('[data-excluir]')) {
       excluirOrcamento(id);
       renderizarBusca();
